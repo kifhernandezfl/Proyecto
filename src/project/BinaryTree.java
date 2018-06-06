@@ -39,9 +39,9 @@ public class BinaryTree
     public BinaryTree(){}
 
     /**
-     * 
-     * @param ask
-     * @param value 
+     Agrega un nuevo nodo al arbol
+     * @param ask valor a agregar
+     * @param value valor a agregar
      */
     public void insert(String ask, int value)
     {
@@ -82,16 +82,18 @@ public class BinaryTree
     }
     
     /**
-    * 
-    * @param raiz
-    * @return raiz
+    * Hace preguntas al usuario
+    * @param raiz con una pregunta
+    * @return raiz con la respuesta
     */  
     public Node Questions(Node raiz)
     {
-        if(raiz.left == null && raiz.right == null)
+        if(raiz.left == null && raiz.right == null) // Verifica que el nodo actual no tenga hijos
         {
+            //Pregunta al usuario si es el personaje en el que pensaba, guarda valor 0 para si, 1 para no
             int rta = JOptionPane.showConfirmDialog(null, raiz.ask , "Respuesta!", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE, icon);
             
+            //Si la respuesta es si, imprime la imagen del jugador
             if(rta == 0)
             {
                 if(raiz.value == 83)
@@ -169,7 +171,8 @@ public class BinaryTree
                 if(raiz.value == 68)
                     gp.setVisible(true);
             }
-                       
+               
+            //Si la respuesta es no, sale del programa
             if(rta == 1)
             {
                 int rt = JOptionPane.showConfirmDialog(null, "Desea agregar a su personaje?" , "Respuesta!", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE, icon);
@@ -179,12 +182,15 @@ public class BinaryTree
                 if(rt == 1)
                     JOptionPane.showMessageDialog(null, "Bien!! juego terminado");
             }
-        }else
+        }else // Si el nodo todavia tiene hijos, pregunta otra vez
         {
+            //Pregunta al usuario si es el personaje en el que pensaba, guarda valor 0 para si, 1 para no
             int rta = JOptionPane.showConfirmDialog(null, raiz.ask, "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE, icon);
           
+            //Si la respuesta es si se desplaza al hijo de la izquierda, y hace la pregunta que hay en este Nodo
             if(rta == 0)
                 raiz.left = Questions(raiz.left);
+            //Si la respuesta es no se desplaza al hijo de la derecha, y Hace la pregunta que hay en el nodo
             if(rta == 1)
                 raiz.right = Questions(raiz.right);
         }    
